@@ -1,41 +1,53 @@
-﻿using nanoFramework.M5Stack; // Fireクラスに必要
+﻿using System;
 using System.Threading;
 using System.Device.Pwm;
 using nanoFramework.Hardware.Esp32;
+using nanoFramework.M5Stack;
 
+using Console = nanoFramework.M5Stack.Console;
+
+// 1. 画面初期化（ここは通っているはず）
 Fire.InitializeScreen();
-nanoFramework.M5Stack.Console.Clear();
-nanoFramework.M5Stack.Console.WriteLine("Hello Fire!");
+Console.Clear();
+Console.WriteLine("Step 1: Init Screen OK");
+Thread.Sleep(500);
 
-// 2. サーボ用ピン(26)の設定
-// タイマー競合を避けるため PWM2 を指定
-Configuration.SetPinFunction(26, DeviceFunction.PWM2);
+int pinNumber = 26;
+int frequency = 50;
 
-using (PwmChannel servo = PwmChannel.CreateFromPin(26, 50))
+try
 {
-    if (servo != null)
-    {
-        servo.Start();
+    // 2. ピン設定
+    // ここでエラーが出るなら 26番がシステムにロックされている
+    Console.WriteLine($"Step 2: Config Pin {pinNumber.ToString()}...");
 
+    Configuration.SetPinFunction(26, DeviceFunction.PWM1);
+
+    // 3. チャンネル作成
+    // CreateFromPinがNullを返すならタイマーの空きがない
+    Console.WriteLine("Step 3: Create Channel...");
+    using (PwmChannel servo = PwmChannel.CreateFromPin(pinNumber, frequency))
+    {
+        Console.WriteLine("Step 4: PWM Start!");
         while (true)
         {
-            // 0度
-            Console.Clear();
-            Console.WriteLine("Angle: 0 deg");
+            servo.Start();
             servo.DutyCycle = 0.025;
             Thread.Sleep(2000);
-
-            // 180度
-            Console.Clear();
-            Console.WriteLine("Angle: 180 deg");
             servo.DutyCycle = 0.125;
             Thread.Sleep(2000);
+            servo.DutyCycle = 0;
+            Thread.Sleep(2000);
+            servo.Stop();
+
         }
     }
-    else
-    {
-        Console.WriteLine("PWM Error!");
-    }
+}
+catch (Exception ex)
+{
+    // 例外が発生したら型名とメッセージを画面に出す
+    Console.WriteLine("Ex: " + ex.GetType().Name);
+    Console.WriteLine(ex.Message);
 }
 
 Thread.Sleep(Timeout.Infinite);
