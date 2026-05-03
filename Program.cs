@@ -20,6 +20,7 @@ try
     // 2. ピン設定
     // ここでエラーが出るなら 26番がシステムにロックされている
     Console.WriteLine($"Step 2: Config Pin {pinNumber.ToString()}...");
+    Thread.Sleep(500);
 
     Configuration.SetPinFunction(26, DeviceFunction.PWM1);
 
