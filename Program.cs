@@ -1,10 +1,14 @@
-﻿using System;
+﻿using nanoFramework.M5Stack; // Fireクラスに必要
 using System.Threading;
-using nanoFramework.M5Stack;
-using Console = nanoFramework.M5Stack.Console;
 
-M5Core.InitializeScreen();
-Console.Clear();
+// 1. 初期化
+Fire.InitializeScreen();
 
-Console.WriteLine("Hello from nanoFramework!");
+// 3. Clearを呼んで画面全体をBackgroundColorで塗りつぶす
+nanoFramework.M5Stack.Console.Clear();
+
+// 4. 少し待ってから表示
+Thread.Sleep(500);
+nanoFramework.M5Stack.Console.WriteLine("Hello Fire!");
+
 Thread.Sleep(Timeout.Infinite);
