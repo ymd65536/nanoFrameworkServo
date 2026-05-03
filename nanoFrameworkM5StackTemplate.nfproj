@@ -12,8 +12,8 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <FileAlignment>512</FileAlignment>
-    <RootNamespace>nanoFrameworkM5StackTemplate</RootNamespace>
-    <AssemblyName>nanoFrameworkM5StackTemplate</AssemblyName>
+    <RootNamespace>nanoFrameworkServo</RootNamespace>
+    <AssemblyName>nanoFrameworkServo</AssemblyName>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
