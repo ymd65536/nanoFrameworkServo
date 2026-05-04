@@ -12,22 +12,17 @@ Console.Clear();
 Console.WriteLine("Step 1: Init Screen OK");
 Thread.Sleep(500);
 
-int pinNumber = 26;
+int horizontalPinNumber = 26;
 int frequency = 50;
 
 try
 {
-    // 2. ピン設定
-    // ここでエラーが出るなら 26番がシステムにロックされている
-    Console.WriteLine($"Step 2: Config Pin {pinNumber.ToString()}...");
-    Thread.Sleep(500);
-
-    Configuration.SetPinFunction(26, DeviceFunction.PWM1);
+    Configuration.SetPinFunction(horizontalPinNumber, DeviceFunction.PWM1);
 
     // 3. チャンネル作成
     // CreateFromPinがNullを返すならタイマーの空きがない
     Console.WriteLine("Step 3: Create Channel...");
-    using (PwmChannel servo = PwmChannel.CreateFromPin(pinNumber, frequency))
+    using (PwmChannel servo = PwmChannel.CreateFromPin(horizontalPinNumber, frequency))
     {
         Console.WriteLine("Step 4: PWM Start!");
         while (true)
