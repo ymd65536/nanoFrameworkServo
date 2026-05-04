@@ -29,6 +29,10 @@ M5Stack Core2はESP32を搭載したマイクロコントローラーで、nanoF
 - VSCode Extension
   - nanoframework.vscode-nanoframework
 
+このリポジトリでは以下のサーボモータを利用しています。
+
+- [Servo Kit 180°](https://docs.m5stack.com/ja/accessory/servo_kit)
+
 ## Setup bootloader
 
 この手順ではnanoFrameworkでビルドしたプログラムを動かすためのブートローダをM5Stackデバイスに書き込む方法を説明します。
@@ -194,6 +198,14 @@ MAC 3C:8A:1F:D6:0A:74
 Target 'ESP32_REV3' best matches the device characteristics.
 Target: ESP32_REV3
 ```
+
+## サーボがモータが機能しない場合
+
+ソースコードが問題なく動く場合（ビルドが成功、デプロイが可能、実行時のエラーが発生しない）といったときは配線を見直してください。
+
+Servo Kit 180°ではGrove to Servo アダプタによって接続を変換しています。
+当然ですが、Groveと黒色連結ピンを逆向きに挿してしまうとGNDとVinを反対になってしまい、動きません。
+※故障や挙動がないので気づきにくい点
 
 ### CS0518 エラー（基本型が見つからない）について
 
